@@ -24,9 +24,14 @@ body {
 a{
   color: #006b3a;
 }
-main a{
-  outline: none;
+
+a:focus-visible, /* Added focus-visible pseudo-class for better accessibility */
+input:focus-visible,
+button:focus-visible {
+  outline: 3px solid #006b3a;
+  outline-offset: 2px;
 }
+
 h2 {
   margin-top: 0;
 }
@@ -197,33 +202,28 @@ article p {
 </head>
 
 <body>
+
   <header>
 
     <div class="container">
       <h1 class="logo">The Funion</h1>
-      
       <!-- Maybe this could be improved with aria-activedescendant later? -->
       <nav class="menu">
         <a href="#">Home</a>
         <a href="#">Politics</a>
-        <a href="#" tabindex="-1">Business</a>
+        <a href="#">Business</a> <!-- tabindex not needed, href already allows tab focus -->
         <a href="#">Entertainment</a>
         <a href="#">Sports</a>
         <a href="#" class="btn-search pull-right"><img src="https://raw.githubusercontent.com/udacity/ud891/2de2a0688c68809a3b453db3a24b1a59e8401459/lesson2-focus/02-dom-order/images/search.svg" alt="Search" />Search</a> 
-
       </nav>
     </div>
+
   </header>
-  <div class="newsletter">
-    <div class="container">
-      <h3>Like the Funion? Consider joining our newsletter!</h3>
-      <input type="text">
-      <button type="button" onfocus="getFocus()">Sign up</button></div>
-      
-    </div>
-  </div>
+
   <main class="container">
+
     <h2 class="offscreen">Top story</h2>
+
     <article class="main-story">
       <img class="pull-right" src="https://github.com/udacity/ud891/blob/gh-pages/lesson2-focus/02-dom-order/images/cat.jpg?raw=true" alt="A cat staring menacingly off into space">
       <div class="info">
@@ -231,22 +231,23 @@ article p {
         <p>
           GRAND RAPIDS, MILorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis
           aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. <a href="#">Read More</a>
-          
         </p>
       </div>
     </article>
   
     <div class="side-by-side">
+
       <div class="column">
         <div class="tier-header">
-          <h2 tabindex="0">In the news</h2>
+          <h2 >In the news</h2> <!-- removed tabindex since header is not an interactive element -->
         </div>
         <article>
           <h3 class="headline">Bee wonders if maybe everyone else is a drone and he's the only one who has it "figured out."</h3>
-          <p><a href="#" tabindex="1"><b>Read More</b></a></p>
+          <p><a href="#"><b>Read More</b></a></p> <!-- tabindex not needed, href already allows tab focus -->
           <img src="https://github.com/udacity/ud891/blob/gh-pages/lesson2-focus/02-dom-order/images/bee.jpg?raw=true" alt="A bee on top of a flower" />
         </article>
       </div>
+
       <div class="column">
         <article>
           <img src="https://github.com/udacity/ud891/blob/gh-pages/lesson2-focus/02-dom-order/images/telephone.jpg?raw=true" alt="A red, London telephone booth" />
@@ -259,11 +260,15 @@ article p {
           </div>
         </article>
       </div>
+
     </div>
+
     <div class="three-col">
+
       <div class="tier-header">
         <h2>Recommended</h2>
       </div>
+
       <div class="columns">
         <article>
           <img src="https://github.com/udacity/ud891/blob/gh-pages/lesson2-focus/02-dom-order/images/dog.jpg?raw=true" alt="A dog at a desk looks up at a laptop and mouse" />
@@ -271,25 +276,42 @@ article p {
             <h3 class="headline">Turn man's best friend into man's best personal assistant. <a href="#">Read More</a></h3>
           </div>
         </article>
+
         <article>
           <img src="https://github.com/udacity/ud891/blob/gh-pages/lesson2-focus/02-dom-order/images/coffee.jpg?raw=true" alt="A cup of coffee on a table" />
           <div class="info">
             <h3 class="headline">San Franciscans are losing their minds over this third wave, artisanal, fair trade, handcrafted, locavore coffee. <a href="#">Read More</a></h3>
+          </div> <!-- Added missing closing div -->
         </article>
+
         <article>
           <img src="https://github.com/udacity/ud891/blob/gh-pages/lesson2-focus/02-dom-order/images/football.jpg?raw=true" alt="A football player hands the ball off to another player" />
           <div class="info">
             <h3 class="headline">Sportsball team scores a touchpoint to win the big race. <a href="#">Read More</a></h3>
           </div>
         </article>
+        
       </div>
+
     </div>
     
   </main>
-  <!--   stuff can be added here :)
-  <footer>
+
+  <footer> <!-- Moved newsletter cta to footer section -->
+   
+    <div class="newsletter"> 
+    <div class="container">
+      <h3>Like the Funion? Consider joining our newsletter!</h3>
+      <label> <!-- Added label for email input -->
+        Email address:
+        <input type="email" name="email" required>
+      </label>
+      <button type="button">Sign up</button>
+    </div>
+   </div> <!-- Removed extra div -->
+
   </footer>
-  -->
+
   
   <script>
     function getFocus() {
